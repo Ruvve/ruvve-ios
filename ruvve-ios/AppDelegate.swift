@@ -14,14 +14,12 @@ import FirebaseAnalytics
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     var window: UIWindow?
     
-//    메세지 받고 나서 willPresent 에 메세지가 담김
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
                                   -> Void) {
       let userInfo = notification.request.content.userInfo
        Messaging.messaging().appDidReceiveMessage(userInfo)
-      print("111: ", userInfo)
       completionHandler([[.alert, .sound]])
     }
 
@@ -30,8 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
       let userInfo = response.notification.request.content.userInfo
       Messaging.messaging().appDidReceiveMessage(userInfo)
-      print("222: ", userInfo)
-
       completionHandler()
     }
     
